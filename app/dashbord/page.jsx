@@ -1,10 +1,10 @@
-import Loginform from '@/component/loginform'
+import Userinfo from '@/component/userinfo'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <Loginform></Loginform>
+      <Userinfo></Userinfo>
     </div>
   )
 }
