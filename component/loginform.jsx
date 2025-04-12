@@ -1,5 +1,15 @@
+"use client"
+
 import Link from "next/link"
+import { useState } from "react"
 export default function Loginform(){
+
+    const [email,setemail]=useState("")
+    const [password,setpassword]=useState("")
+    const [error, setError] = useState("error")
+
+
+
     return(
         <div>
             hello world
@@ -11,14 +21,19 @@ export default function Loginform(){
                     </div>
                     
                     <div className="flex justify-center items-center mt-10">
-                        <input type="text" placeholder="E-mail" className="border-white text-white border-2"/>
+                        <input onChange={e=>setemail(e.target.value)} type="text" placeholder="E-mail" className="border-white text-white border-2"/>
                     </div>
                     <div className="flex justify-center items-center mt-6">
-                        <input type="password" placeholder="Password" className="border-white text-white border-2"/>
+                        <input onChange={e=>setpassword(e.target.value)} type="password" placeholder="Password" className="border-white text-white border-2"/>
                     </div>
                     <div className="text-center flex justify-center items-center h-10">
                         <button className="mt-5 hover:border-white hover:border-2 w-28">Login</button>
                     </div>
+                    {error &&(
+                        <div className="border-2 border-red-500 w-40 text-center bg-red-500 text-white rounded-sm">
+                                {error}
+                        </div>
+                    )}
                     <div className="text-center mt-3 relative">
                         <div>
                             don't have an account?<span className="border-b-[1.5px] border-gray-5"><Link href={"/Register"}><button>Register</button></Link></span>
