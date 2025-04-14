@@ -12,10 +12,14 @@ const Userinfo = () => {
     </div>
     
     <div className="flex justify-center items-center mt-10">
-        <div>user:</div><span>roshan panda</span>
+        <div>user:</div><span className='ml-2'>roshan panda</span>
     </div>
-    <div className="flex justify-center items-center mt-6">
-    <div>e-mail:</div><span>roshanpanda@gmail.com</span>
+    <div className="flex justify-center items-center mt-3">
+    <div>e-mail:</div><span className='ml-2'>roshanpanda@gmail.com</span>
+    </div>
+    <div className='flex justify-center items-center'>
+    <div className='text-center mt-6 bg-red-500 w-32'>log out</div>
+
     </div>
 </div>
 </div>

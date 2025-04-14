@@ -2,11 +2,37 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
+
 export default function Loginform(){
+    
+    const router=useRouter()
 
     const [email,setemail]=useState("")
     const [password,setpassword]=useState("")
-    const [error, setError] = useState("error")
+    const [error, setError] = useState("")
+
+    const handleSubmit=async(e)=>{
+        e.preventDefault()
+
+        try{
+            const res=await signIn("credentials",{
+                email,
+                password,
+                redirect:false,
+            })
+            if(res.error){
+                setError("invalid credentials")
+                return
+            }
+
+            router.replace("dashbord")
+        }
+        catch(error){
+            console.log("error");
+        }
+    }
 
 
 
@@ -27,7 +53,7 @@ export default function Loginform(){
                         <input onChange={e=>setpassword(e.target.value)} type="password" placeholder="Password" className="border-white text-white border-2"/>
                     </div>
                     <div className="text-center flex justify-center items-center h-10">
-                        <button className="mt-5 hover:border-white hover:border-2 w-28">Login</button>
+                        <button className="mt-5 hover:border-white hover:border-2 w-28"onClick={handleSubmit}>Login</button>
                     </div>
                     {error &&(
                         <div className="border-2 border-red-500 w-40 text-center bg-red-500 text-white rounded-sm">

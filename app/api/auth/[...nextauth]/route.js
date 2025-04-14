@@ -19,7 +19,7 @@ const authOptopn={
     session:{
         strategy:"jwt"
     },
-    secret:process.env.MEXT_AUTH_SECRET,
+    secret:process.env.NEXTAUTH_SECRET,
     pages:{
         signIn:"/"
     }
