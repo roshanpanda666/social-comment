@@ -4,7 +4,7 @@ import nextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs"
 import mongoose from "mongoose";
-const authOptopn={
+export const authOption={
     providers:[
         CredentialsProvider({
             name:"credentials",
@@ -45,6 +45,6 @@ const authOptopn={
 
 };
 
-const handlers = nextAuth(authOptopn)
+const handler = nextAuth(authOption)
 
-export {handlers as GET,handlers as POST}
+export {handler as GET,handler as POST}

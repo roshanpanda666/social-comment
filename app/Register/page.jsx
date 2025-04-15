@@ -7,6 +7,8 @@ export default function Register() {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [error, seterror] = useState("");
+    const [comment, setcomment] = useState("");
+
 
     const router=useRouter()
     const handlesubmit = async (e) => {
@@ -42,7 +44,7 @@ export default function Register() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ name, email, password })
+                body: JSON.stringify({ name, email, password, comment })
             });
 
             if (res.ok) {
@@ -50,6 +52,7 @@ export default function Register() {
                 setname("");
                 setemail("");
                 setpassword("");
+                setcomment("")
 
                 router.push("/")
             } else {
@@ -100,7 +103,7 @@ export default function Register() {
 
                 {error && (
                     <div className="bg-red-500 text-white text-center p-2 mt-2 w-64 mx-auto rounded">
-                        {error}
+                        {error}{comment}
                     </div>
                 )}
 

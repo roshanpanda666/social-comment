@@ -6,7 +6,7 @@ import bcrypt from "bcrypt"; // ← Import bcrypt
 
 export async function POST(req) {
     try {
-        const { name, email, password } = await req.json();
+        const { name, email, password , comment} = await req.json();
 
         console.log("Received Data ->", { name, email, password });
 
@@ -25,6 +25,7 @@ export async function POST(req) {
         const newUser = await User.create({
             name,
             email,
+            comment,
             password: hashedPassword,
         });
 
