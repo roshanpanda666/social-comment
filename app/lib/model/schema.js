@@ -16,6 +16,10 @@ const userSchema=new Schema({
         require:true,
 
     },
+    comment:{
+        type:String,
+        require:true,
+    },
 },
     {timestamps:true}
 )

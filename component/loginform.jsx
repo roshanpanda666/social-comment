@@ -27,7 +27,7 @@ export default function Loginform(){
                 return
             }
 
-            router.replace("dashbord")
+            router.replace("dashboard")
         }
         catch(error){
             console.log("error");

@@ -1,7 +1,9 @@
+import { connectionSRT } from "@/app/lib/db";
+import User from "@/app/lib/model/schema";
 import nextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-
-
+import bcrypt from "bcryptjs"
+import mongoose from "mongoose";
 const authOptopn={
     providers:[
         CredentialsProvider({
@@ -10,8 +12,25 @@ const authOptopn={
 
 
             async authorize(credentials){
-                const user={id:'1'}
-                return user
+                const{email,password}=credentials
+                
+
+                try{
+                    await mongoose.connect(connectionSRT)
+                    const user=await User.findOne({email})
+                    if(!user){
+                        return null 
+                    }
+
+                    const passwordMatch=await bcrypt.compare(password,user.password)
+                    if(!passwordMatch){
+                        return null
+
+                    }
+                    return user
+                }catch(error){
+                    console.log("error:",error);
+                }   
             },
 
         }),
