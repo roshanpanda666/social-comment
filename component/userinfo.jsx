@@ -19,7 +19,7 @@ const Userinfo = () => {
   }, []);
 
   return (
-    <div>
+    <div className='flex justify-center items-center flex-col'>
       <div>
       <div className="text-white flex justify-center items-center h-screen">
 
@@ -52,6 +52,7 @@ const Userinfo = () => {
 </div>
 </div>
       </div>
+      
     </div>
   )
 }

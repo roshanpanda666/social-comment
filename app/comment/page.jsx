@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
-
+import Link from "next/link";
 const Page = () => {
   const commentRef = useRef();
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,14 @@ const Page = () => {
         >
           Save Comment
         </button>
+        
       </form>
+      <div>
+        <Link href="/dashboard">
+      
+      <div className="text-blue-400">dashboard</div>
+    </Link>
+        </div>
     </div>
   );
 };
