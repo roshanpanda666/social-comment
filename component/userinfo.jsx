@@ -3,8 +3,20 @@ import React from 'react'
 import { signOut } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useEffect, useState } from "react";
 const Userinfo = () => {    
   const {data:session}=useSession()
+  const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    fetch("/api/getusercomment")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setComment(data.comment);
+        }
+      });
+  }, []);
 
   return (
     <div>
@@ -22,6 +34,13 @@ const Userinfo = () => {
     <div className="flex justify-center items-center mt-3">
     <div>e-mail:</div><span className='ml-2'>{session?.user?.email}</span>
     </div>
+
+    <div className="flex justify-center items-center mt-3">
+    <div>comment:</div><span className='ml-2'><p>{comment}</p></span>
+    </div>
+
+    
+    
     <div className='flex justify-center items-center'>
     <div className='text-center mt-6 bg-red-500 w-32 cursor-pointer'onClick={()=>signOut()}>log out</div>
 
