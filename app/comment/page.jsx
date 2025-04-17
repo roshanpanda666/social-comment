@@ -1,19 +1,24 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
+
 const Page = () => {
   const commentRef = useRef();
   const [loading, setLoading] = useState(true);
-  const email = "saby@example.com"; // Replace with dynamic user email later
+  const [comments, setComments] = useState([]);
+  const email = "saby@example.com"; // Replace with actual dynamic email
 
-  // Fetch comment on load
+  // Fetch all comments
   useEffect(() => {
-    const fetchComment = async () => {
+    const fetchComments = async () => {
       try {
         const res = await fetch(`/api/commentpart?email=${email}`);
         const data = await res.json();
-        if (data.success && commentRef.current) {
-          commentRef.current.value = data.comment;
+        if (data.success) {
+          setComments(data.comments);
+          if (commentRef.current) {
+            commentRef.current.value = data.comments[data.comments.length - 1] || "";
+          }
         }
         setLoading(false);
       } catch (err) {
@@ -22,7 +27,7 @@ const Page = () => {
       }
     };
 
-    fetchComment();
+    fetchComments();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -41,9 +46,11 @@ const Page = () => {
       const result = await response.json();
 
       if (result.success) {
-        alert("Comment updated successfully ✅");
+        alert("Comment added ✅");
+        setComments((prev) => [...prev, comment]);
+        commentRef.current.value = "";
       } else {
-        alert("Failed to update comment ❌");
+        alert("Failed to add comment ❌");
       }
     } catch (err) {
       console.error(err);
@@ -52,20 +59,20 @@ const Page = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-black">
+    <div className="flex flex-col items-center min-h-screen bg-black text-white p-6">
       <form
         onSubmit={handleSubmit}
-        className="bg-transparent border-white border-2 p-6 rounded-lg shadow-md w-[24rem]"
+        className="bg-transparent border-white border-2 p-6 rounded-lg shadow-md w-full max-w-md"
       >
-        <h2 className="text-xl font-semibold mb-4 text-center text-white">
-          {loading ? "Loading..." : "Edit Your Comment"}
+        <h2 className="text-xl font-semibold mb-4 text-center">
+          {loading ? "Loading..." : "Add a Comment"}
         </h2>
 
         <input
           type="text"
           ref={commentRef}
           placeholder="Type your comment..."
-          className="w-full border px-3 py-2 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full border px-3 py-2 rounded mb-4  focus:outline-none focus:ring-2 focus:ring-blue-400 text-white"
           required
         />
 
@@ -73,16 +80,24 @@ const Page = () => {
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
         >
-          Save Comment
+          Add Comment
         </button>
-        
       </form>
-      <div>
-        <Link href="/dashboard">
-      
-      <div className="text-blue-400">dashboard</div>
-    </Link>
-        </div>
+
+      <div className="mt-8 w-full max-w-md">
+        <h3 className="text-lg font-bold mb-2">Previous Comments:</h3>
+        <ul className="space-y-2">
+          {comments.map((c, index) => (
+            <li key={index} className="bg-gray-800 p-2 rounded">
+              {c}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <Link href="/dashboard" className="mt-6 text-blue-400 underline">
+        Go to Dashboard
+      </Link>
     </div>
   );
 };
