@@ -12,58 +12,58 @@ const Userinfo = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          setComments(data.comments); // now using array of comments
+          setComments(data.comments);
         }
       });
   }, []);
 
   return (
-    <div className="flex justify-center items-center flex-col">
-      <div className="text-white flex justify-center items-center h-screen">
-        <div className="w-[40rem] border-2 border-b-white h-auto py-10 px-6 rounded-2xl bg-black shadow-xl">
-          <div className="text-center text-xl font-bold mb-6">User Details</div>
+    <div className="flex justify-center items-center flex-col px-4 py-8 min-h-screen bg-black">
+      <div className="w-full max-w-md border border-white/20 rounded-xl bg-gray-900 p-6 shadow-lg">
+        <h2 className="text-center text-2xl text-white font-bold mb-6">
+          User Details
+        </h2>
 
-          <div className="flex justify-center items-center mb-3">
-            <div className="font-semibold">User:</div>
-            <span className="ml-2">{session?.user?.name}</span>
-          </div>
+        <div className="mb-4">
+          <div className="text-white font-medium">User:</div>
+          <div className="text-gray-300 text-sm">{session?.user?.name}</div>
+        </div>
 
-          <div className="flex justify-center items-center mb-3">
-            <div className="font-semibold">E-mail:</div>
-            <span className="ml-2">{session?.user?.email}</span>
+        <div className="mb-4">
+          <div className="text-white font-medium">E-mail:</div>
+          <div className="text-gray-300 text-sm break-all">
+            {session?.user?.email}
           </div>
+        </div>
 
-          <div className="flex justify-center items-start mb-3">
-            <div className="font-semibold">Comments:</div>
-            <div className="ml-2 flex flex-col text-left max-w-md">
-              {comments.length > 0 ? (
-                comments.map((c, i) => (
-                  <p key={i} className="text-sm text-gray-200">
-                    • {c}
-                  </p>
-                ))
-              ) : (
-                <p className="text-sm text-gray-400">No comments yet</p>
-              )}
-            </div>
+        <div className="mb-4">
+          <div className="text-white font-medium">Comments:</div>
+          <div className="ml-2 flex flex-col text-left text-sm mt-1">
+            {comments.length > 0 ? (
+              comments.map((c, i) => (
+                <p key={i} className="text-gray-300">
+                  • {c}
+                </p>
+              ))
+            ) : (
+              <p className="text-gray-400">No comments yet</p>
+            )}
           </div>
+        </div>
 
-          <div className="flex justify-center items-center mt-6">
-            <button
-              className="text-center bg-red-500 hover:bg-red-600 px-6 py-2 rounded-lg text-white transition duration-200"
-              onClick={() => signOut()}
-            >
-              Log Out
-            </button>
-          </div>
+        <button
+          className="w-full bg-red-500 hover:bg-red-600 py-2 mt-6 rounded-lg text-white transition duration-200"
+          onClick={() => signOut()}
+        >
+          Log Out
+        </button>
 
-          <div className="flex justify-center mt-4">
-            <Link href="/comment">
-              <div className="text-blue-400 underline hover:text-blue-600">
-                Go to Comment Page
-              </div>
-            </Link>
-          </div>
+        <div className="text-center mt-4">
+          <Link href="/comment">
+            <span className="text-blue-400 underline hover:text-blue-500 text-sm">
+              Go to Comment Page
+            </span>
+          </Link>
         </div>
       </div>
     </div>

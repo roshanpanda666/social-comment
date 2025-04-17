@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./providers";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,10 +22,25 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950 text-white flex flex-col min-h-screen`}
       >
         <AuthProvider>
-        {children}
+          <main className="flex-grow pb-20">{children}</main>
+
+          {/* Bottom Navigation */}
+          <nav className="bg-gray-900 border-t border-gray-700 text-white fixed bottom-0 w-full py-3">
+            <div className="flex justify-around text-sm">
+              <Link href="/home" className="hover:text-yellow-400">
+                Home
+              </Link>
+              <Link href="/comment" className="hover:text-yellow-400">
+                Add
+              </Link>
+              <Link href="/dashboard" className="hover:text-yellow-400">
+                About
+              </Link>
+            </div>
+          </nav>
         </AuthProvider>
       </body>
     </html>
