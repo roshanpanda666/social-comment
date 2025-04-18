@@ -17,12 +17,15 @@ const Home = () => {
   if (error) return <div className="text-red-500">Failed to load data 😢</div>
   if (isLoading) return <div className="text-white">Loading... 🔄</div>
 
+  // Reverse the data to show latest first
+  const reversedData = [...datalist].reverse()
+
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center py-10 px-4">
       <h1 className="text-3xl font-bold text-white mb-8">Comments</h1>
 
       <div className="w-full max-w-2xl flex flex-col gap-4">
-        {datalist.map((item) => (
+        {reversedData.map((item) => (
           <div
             key={item._id}
             className="bg-gray-800 hover:bg-gray-700 transition-all p-6 rounded-2xl shadow-md border border-gray-700"
