@@ -13,7 +13,7 @@ export async function POST(req) {
     // Check if user exists
     const user = await User.findOne({ email }).select("_id");
 
-    console.log("user: ", user);
+    
 
     // Return response
     return NextResponse.json({ user: user || null });

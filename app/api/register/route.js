@@ -8,7 +8,7 @@ export async function POST(req) {
     try {
         const { name, email, password , comment} = await req.json();
 
-        console.log("Received Data ->", { name, email, password });
+        console.log("Received Data ->", { name, email, });
 
         await mongoose.connect(connectionSRT); // Connect to MongoDB
 
