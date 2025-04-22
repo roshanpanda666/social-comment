@@ -17,14 +17,13 @@ const Home = () => {
   if (error) return <div className="text-red-500">Failed to load data 😢</div>
   if (isLoading) return <div className="text-white">Loading... 🔄</div>
 
-  // Flatten the data to extract individual comments with user info and timestamp
+  // Flatten the data to extract individual comments with user info
   const flattenedComments = datalist.flatMap((item) =>
     item.comments?.map((comment) => ({
       userId: item._id,
       name: item.name,
       email: item.email,
-      text: typeof comment === 'string' ? comment : comment.text,
-      createdAt: typeof comment === 'string' ? null : comment.createdAt,
+      comment,
     })) || []
   ).reverse() // latest comment first
 
@@ -39,13 +38,8 @@ const Home = () => {
             className="bg-gray-800 hover:bg-gray-700 transition-all p-6 rounded-2xl shadow-md border border-gray-700"
           >
             <div className="text-white text-xl font-semibold mb-1">{item.name}</div>
-            <div className="text-gray-400 text-sm mb-1">{item.email}</div>
-            {item.createdAt && (
-              <div className="text-gray-500 text-xs mb-2">
-                🕒 {new Date(item.createdAt).toLocaleString()}
-              </div>
-            )}
-            <div className="text-cyan-500 text-2xl">💬 {item.text}</div>
+            <div className="text-gray-400 text-sm mb-4">{item.email}</div>
+            <div className="text-cyan-500 text-2xl">💬 {item.comment}</div>
           </div>
         ))}
       </div>
