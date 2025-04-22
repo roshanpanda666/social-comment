@@ -3,7 +3,7 @@ import mongoose, { Schema, models } from "mongoose";
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true, // fixed spelling from "require"
+    required: true,
   },
   email: {
     type: String,
@@ -16,8 +16,8 @@ const userSchema = new Schema({
   },
   comments: [
     {
-      type: String,
-      required: true,
+      text: { type: String, required: true },
+      createdAt: { type: Date, default: Date.now }
     }
   ],
 }, 
