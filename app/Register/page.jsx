@@ -66,7 +66,7 @@ export default function Register() {
     return (
         <div className="text-white flex justify-center items-center h-screen">
             <div className="w-[40rem] border-2 border-b-white h-[24rem] rounded-2xl">
-                <div className="text-center text-white mt-16">Enter the details</div>
+                <div className="text-center text-white mt-16">register yourself</div>
 
                 <form onSubmit={handlesubmit} className="flex flex-col items-center mt-10">
                     <input
