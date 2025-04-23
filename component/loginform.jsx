@@ -43,7 +43,7 @@ export default function Loginform(){
 
                 <div className="w-[40rem] border-2 border-b-white h-[20rem] rounded-2xl">
                     <div className="text-center text-white mt-16">
-                        Enter the details
+                        Enter the details to log-in
                     </div>
                     
                     <div className="flex justify-center items-center mt-10">
