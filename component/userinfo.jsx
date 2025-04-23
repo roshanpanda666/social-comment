@@ -21,7 +21,7 @@ const Userinfo = () => {
     <div className="flex justify-center items-center flex-col px-4 py-8 min-h-screen bg-black">
       <div className="w-full max-w-md border border-white/20 rounded-xl bg-gray-900 p-6 shadow-lg">
         <h2 className="text-center text-2xl text-white font-bold mb-6">
-          User Details
+          Your Details
         </h2>
 
         <div className="mb-4">
